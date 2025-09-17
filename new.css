@@ -5,8 +5,14 @@ a {
 li {
     list-style: none;
 }
+body{
+    margin: 0;
+}
 .titles {
     display: flex;
+    font-family: "Yomogi", cursive;
+    font-weight: bold;
+    font-size: 20px;
 }
 .header {
     background: #a50082;
@@ -24,5 +30,24 @@ li {
 .contents {
     display: flex;
     justify-content: space-around;
-    margin-top: 20px;
+    margin-top: 0px;
+}
+.t-img {
+    width:50%;
+}
+.p-img {
+    width: 100%;
+}
+.p-text {
+    width: 50%;
+    padding: 20% 40px;
+}
+.p-title {
+    text-align: center;
+    font-family: "Yomogi", cursive;
+    font-size: 40px;
+    font-weight: bold;
+}
+.p-text{
+    font-size: 20px;
 }
