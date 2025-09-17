@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新立将也 | プログラミング教師</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background: #f0f4ff;
+      color: #333;
+    }
+    /* ヘッダー */
+    .header {
+      background: linear-gradient(135deg, #ff6a00, #ff0084, #0066ff);
+      color: #fff;
+      text-align: center;
+      padding: 40px 16px;
+      animation: gradientMove 10s ease infinite;
+      background-size: 300% 300%;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .profile-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-top: 16px;
+      border: 5px solid #fff;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.5s;
+    }
+    .profile-img:hover {
+      transform: rotate(360deg) scale(1.1);
+    }
+    .header h1 {
+      margin: 16px 0 8px;
+      font-size: 44px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+    }
+    .header p {
+      margin: 0;
+      font-size: 21px;
+      font-weight: bold;
+    }
+    /* コンテナ */
+    .container {
+      max-width: 950px;
+      margin: 32px auto;
+      padding: 0 16px;
+    }
+    /* カード */
+    .card {
+      background: #fff;
+      padding: 28px;
+      margin-bottom: 32px;
+      border-radius: 12px;
+      border-left: 8px solid transparent;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05) rotate(-1deg);
+      border-color: #ff6a00;
+    }
+    .card h2 {
+      margin-top: 0;
+      color: #ff0084;
+    }
+    /* リスト */
+    .list {
+      list-style: none;
+      padding: 0;
+    }
+    .list li {
+      font-weight: bold;
+      padding: 6px 0;
+      color: #333;
+      transition: transform 0.3s;
+    }
+    .list li:hover {
+      transform: translateX(10px) scale(1.1);
+      color: #ff6a00;
+    }
+    .list li::before {
+      content: "★";
+      color: #ff6a00;
+      margin-right: 8px;
+    }
+    /* ギャラリー */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.4s, box-shadow 0.4s;
+    }
+    .gallery img:hover {
+      transform: rotate(5deg) scale(1.1);
+      box-shadow: 0 6px 25px rgba(255,0,132,0.6);
+    }
+    /* モーダル */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      animation: fadeIn 0.6s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-content {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+      opacity: 0;
+      transform: scale(0.8);
+      transition: transform 0.5s, opacity 0.5s;
+    }
+    .modal.show .modal-content {
+      opacity: 1;
+      transform: scale(1);
+    }
+    /* 閉じるボタン */
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      transition: transform 0.3s, color 0.3s;
+    }
+    .close:hover {
+      transform: rotate(90deg);
+      color: #ff6a00;
+    }
+    /* 矢印 */
+    .arrow {
+      position: absolute;
+      top: 50%;
+      font-size: 48px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      user-select: none;
+      padding: 8px;
+      border-radius: 50%;
+      transition: transform 0.3s, background 0.3s;
+    }
+    .arrow:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.3);
+    }
+    .prev {
+      left: 30px;
+      transform: translateY(-50%);
+    }
+    .next {
+      right: 30px;
+      transform: translateY(-50%);
+    }
+    /* フッター */
+    .footer {
+      text-align: center;
+      padding: 24px;
+      background: linear-gradient(135deg, #0066ff, #ff0084, #ff6a00);
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      animation: gradientMove 12s ease infinite;
+      background-size: 300% 300%;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <img src="https://wxqf8wydmycheikp.public.blob.vercel-storage.com/shintatemasaya/profile-9616ueYbmycUTDuMGoKNUzPojtZyDO.jpeg" alt="プロフィール写真" class="profile-img">
+    <h1>新立 将也</h1>
+    <p>プログラミング教師 | 卓球部顧問</p>
+  </header>
+
+  <main class="container">
+    <div class="card">
+      <h2>プロフィール</h2>
+      <p>新立将也です。プログラミングを教えながら、生徒の成長をサポートしています。卓球部の顧問も務め、生徒たちと共に日々挑戦を続けています。</p>
+    </div>
+
+    <div class="card">
+      <h2>趣味</h2>
+      <ul class="list">
+        <li>ポーカー</li>
+        <a href="https://note.com/jonason/m/m80e25bb4949e" class="card-text" target="_blank"> 
+            <li>小説を書くこと</li>
+        </a>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>ギャラリー</h2>
+      <div class="gallery">
+        <img src="https://wxqf8wydmycheikp.public.blob.vercel-storage.com/shintatemasaya/IMG_6968-FEOXWjRNk8Q7wRTsnxIO61fhSasduK.jpeg" alt="写真1">
+        <img src="https://wxqf8wydmycheikp.public.blob.vercel-storage.com/shintatemasaya/IMG_0520-oIlb3k1TGWW40hnEYiDs7QmW0wIcq5.jpeg" alt="写真2">
+        <img src="https://wxqf8wydmycheikp.public.blob.vercel-storage.com/shintatemasaya/IMG_4757-uxlxu5sxrh83MUPZQWPp1RZpNjgOfr.jpeg" alt="写真3">
+      </div>
+    </div>
+  </main>
+
+  <!-- モーダル -->
+  <div class="modal" id="imageModal">
+    <span class="close" id="closeModal">&times;</span>
+    <span class="arrow prev" id="prev">&#10094;</span>
+    <img class="modal-content" id="modalImage" alt="拡大画像">
+    <span class="arrow next" id="next">&#10095;</span>
+  </div>
+
+  <footer class="footer">
+    <p>&copy; 2025 新立将也</p>
+  </footer>
+
+  <script>
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const closeBtn = document.getElementById("closeModal");
+    const nextBtn = document.getElementById("next");
+    const prevBtn = document.getElementById("prev");
+
+    const images = Array.from(document.querySelectorAll(".gallery img"));
+    let currentIndex = 0;
+    let slideshowInterval;
+
+    // 画像表示処理
+    function showImage(index) {
+      modalImg.style.opacity = "0";
+      setTimeout(() => {
+        modalImg.src = images[index].src;
+        modalImg.style.opacity = "1";
+        currentIndex = index;
+      }, 200);
+    }
+
+    // 自動スライド開始
+    function startSlideshow() {
+      slideshowInterval = setInterval(() => {
+        showImage((currentIndex + 1) % images.length);
+      }, 5000); // 5秒ごと
+    }
+
+    // 自動スライド停止
+    function stopSlideshow() {
+      clearInterval(slideshowInterval);
+    }
+
+    // 画像クリックでモーダル表示
+    images.forEach((img, index) => {
+      img.addEventListener("click", () => {
+        modal.style.display = "flex";
+        modal.classList.add("show");
+        currentIndex = index;
+        showImage(currentIndex);
+        startSlideshow();
+      });
+    });
+
+    // 閉じる
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+      stopSlideshow();
+    });
+
+    // 背景クリックでも閉じる
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+        stopSlideshow();
+      }
+    });
+
+    // 次へ
+    nextBtn.addEventListener("click", () => {
+      showImage((currentIndex + 1) % images.length);
+    });
+
+    // 前へ
+    prevBtn.addEventListener("click", () => {
+      showImage((currentIndex - 1 + images.length) % images.length);
+    });
+
+    // キーボード操作
+    document.addEventListener("keydown", (e) => {
+      if (modal.style.display === "flex") {
+        if (e.key === "ArrowRight") nextBtn.click();
+        if (e.key === "ArrowLeft") prevBtn.click();
+        if (e.key === "Escape") {
+          modal.style.display = "none";
+          stopSlideshow();
+        }
+      }
+    });
+  </script>
+</body>
+</html>
