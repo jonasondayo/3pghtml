@@ -26,6 +26,7 @@ body{
     display: flex;
     justify-content: space-around;
     padding: 10px;
+    margin: 0;
 }
 .contents {
     display: flex;
@@ -53,4 +54,21 @@ body{
 }
 .location:hover {
     color: red;
+}
+.k-title {
+    text-align: center;
+    margin-top: 0;
+}
+.k-lists {
+    text-align: center;
+    padding-bottom: 20px;
+}
+.k-text {
+    text-align: center;
+    color: teal;
+}
+.kentei {
+    background: lightsalmon;
+    margin: 20px 50px;
+    border-radius: 30px;
 }
