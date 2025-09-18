@@ -90,4 +90,11 @@ body{
 }
 .s-lists {
     display: flex;
+    padding: 0 18% 25px;
+    margin: 0;
+}
+.s-text {
+    text-align: center;
+    color: #3431f7;
+    text-decoration: dotted;
 }
