@@ -42,6 +42,7 @@ body{
 .p-text {
     width: 50%;
     padding: 20% 40px;
+    background: lightyellow;
 }
 .p-title {
     text-align: center;
@@ -67,9 +68,26 @@ body{
 .k-text {
     text-align: center;
     color: teal;
+    padding: 5px;
 }
 .kentei {
     background: lightsalmon;
     margin: 20px 50px;
     border-radius: 30px;
+}
+.skill {
+    background: lightcyan;
+    margin: 20px 50px;
+    border-radius: 30px;
+}
+.s-title {
+    text-align: center;
+    margin-top: 0;
+    color: #4b8bf2;
+}
+.s-text {
+    width: 50%;
+}
+.s-lists {
+    display: flex;
 }
